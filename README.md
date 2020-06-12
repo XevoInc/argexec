@@ -45,7 +45,7 @@ from argexec import argexec
 from argexec.types import LogLevel
 
 @argexec
-def foo(w: int, x: Tuple[str, ...], y: LogLevel, z: bool = True):
+def _(w: int, x: Tuple[str, ...], y: LogLevel, z: bool = True):
     """
     Hello, world!
 
@@ -59,7 +59,7 @@ def foo(w: int, x: Tuple[str, ...], y: LogLevel, z: bool = True):
 
 ```
 $ ./foo.py --help
-usage: scratch_1.py [-h] [-y] [--no-z] w [x [x ...]]
+usage: foo.py [-h] [-y] [--no-z] w [x [x ...]]
 
 Hello, world!
 
