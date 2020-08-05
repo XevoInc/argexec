@@ -16,7 +16,7 @@ from ._docstring import get_type_name, parse_docstring
 from .types import argexec_param_options
 
 
-@typechecked
+@typechecked(always=True)
 def argexec(func: Callable):
     """
     Builds automatic argument parser for the given function and calls it.
@@ -25,6 +25,12 @@ def argexec(func: Callable):
 
     :param func: function to execute.
     """
+    # We must go up two frames because this function itself is decorated.
+    caller = _inspect.currentframe().f_back.f_back
+    if caller.f_globals['__name__'] != '__main__':
+        # Decorated function is not __main__, skip execution.
+        return func
+
     description, params = parse_docstring(func)
     parser = _argparse.ArgumentParser(description=description, formatter_class=_argparse.RawTextHelpFormatter)
 
